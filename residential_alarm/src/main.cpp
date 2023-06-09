@@ -1,15 +1,15 @@
 #include <Arduino.h>
 
-int alarmePortaSala = 2;
-int alarmeJanelaSala = 3;
-int alarmePortaCozinha = 4;
-int alarmeJanelaCozinha = 5;
+#define ALARME_PORTA_SALA 2
+#define ALARME_JANELA_SALA 3
+#define ALARME_PORTA_COZINHA 4
+#define ALARME_JANELA_COZINHA 5
 
 void setup() {
-  pinMode(alarmePortaSala, INPUT_PULLUP);
-  pinMode(alarmeJanelaSala, INPUT_PULLUP);
-  pinMode(alarmePortaCozinha, INPUT_PULLUP);
-  pinMode(alarmeJanelaCozinha, INPUT_PULLUP);
+  pinMode(ALARME_JANELA_SALA, INPUT_PULLUP);
+  pinMode(ALARME_PORTA_SALA, INPUT_PULLUP);
+  pinMode(ALARME_PORTA_COZINHA, INPUT_PULLUP);
+  pinMode(ALARME_JANELA_COZINHA, INPUT_PULLUP);
 }
 
 void loop() {
