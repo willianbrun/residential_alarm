@@ -1,9 +1,9 @@
 #include "is_access_opened.cpp"
 /**
- * @brief 
+ * @brief Verifica se o acesso está aberto
  * 
  * @param accessPort 
- * @return true 
- * @return false 
+ * @return True se está aberto.
+ * @return False  se está fechado
  */
 bool isAccessOpened(const int accessPort);
