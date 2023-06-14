@@ -211,14 +211,14 @@ void dispararBuzzer()
   int frequencia;
   if (buzzerIsPlaying)
   {
-    if ((millis() - millisDisplay) > 5)
+    if ((millis() - millisBuzzer) > 2)
     {
       // converte graus para radiando e depois obtém o valor do seno
       seno = (sin(i * 3.1416 / 180));
       // gera uma frequência a partir do valor do seno
       frequencia = 2000 + (int(seno * 1000));
       tone(BUZZER, frequencia);
-      millisDisplay = millis();
+      millisBuzzer = millis();
     }
     i++;
     if (i > 180)
