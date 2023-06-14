@@ -18,6 +18,7 @@
 
 LiquidCrystal lcd(2, 3, 4, 5, 6, 7);
 unsigned long millisDisplay = millis();
+unsigned long millisBuzzer = millis();
 
 void ativarAlarme();
 void desativarAlarme();
@@ -31,6 +32,7 @@ bool isOn = false;
 bool buzzerIsPlaying = false;
 String alarmesDisparando = "";
 String oldAlarmesDisparando = "";
+int i = 0;
 
 void setup()
 {
@@ -54,6 +56,14 @@ void setup()
 
 void loop()
 {
+  if (buzzerIsPlaying)
+  {
+    if (i >= 180)
+    {
+      i = 0;
+    }
+    dispararBuzzer();
+  }
   int ligaAlarme = digitalRead(LIGA_ALARME_BUTTON);
   if (ligaAlarme == 0 && ligaAlarmeLastState == 1)
   {
@@ -68,6 +78,7 @@ void loop()
     {
       noTone(BUZZER);
       buzzerIsPlaying = false;
+      oldAlarmesDisparando = "";
     }
   }
   else if (ligaAlarme == 1)
@@ -193,17 +204,25 @@ void desativarAlarme()
   tone(BUZZER, 589, 200); // LA
   welcome();
 }
+
 void dispararBuzzer()
 {
   float seno;
   int frequencia;
-  for (int x = 0; x < 180; x++)
+  if (buzzerIsPlaying)
   {
-    // converte graus para radiando e depois obtém o valor do seno
-    seno = (sin(x * 3.1416 / 180));
-    // gera uma frequência a partir do valor do seno
-    frequencia = 2000 + (int(seno * 1000));
-    tone(BUZZER, frequencia);
+    if ((millis() - millisDisplay) > 5)
+    {
+      // converte graus para radiando e depois obtém o valor do seno
+      seno = (sin(i * 3.1416 / 180));
+      // gera uma frequência a partir do valor do seno
+      frequencia = 2000 + (int(seno * 1000));
+      tone(BUZZER, frequencia);
+      millisDisplay = millis();
+    }
+    i++;
+    if (i > 180)
+      i = 0;
   }
 }
 
